@@ -2,8 +2,14 @@ import { setupServer } from './server.js';
 import { initMongoConnection } from './db/initMongoConnection.js';
 
 const bootstrap = async () => {
-  await initMongoConnection();
-  setupServer();
+  try {
+    await initMongoConnection();
+
+    setupServer();
+  } catch (error) {
+    console.error('Bootstrap sırasında hata oluştu:', error);
+    process.exit(1);
+  }
 };
 
 bootstrap();

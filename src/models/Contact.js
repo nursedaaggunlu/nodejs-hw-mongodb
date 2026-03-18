@@ -17,8 +17,8 @@ const contactsSchema = new Schema(
       default: 'personal',
     },
     isFavourite: {
-      type: Number,
-      required: true,
+      type: Boolean,
+      default: false,
     },
     email: {
       type: String,
