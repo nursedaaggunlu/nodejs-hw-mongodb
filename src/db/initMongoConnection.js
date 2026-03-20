@@ -3,7 +3,12 @@ import { env } from '../utils/env.js';
 
 export const initMongoConnection = async () => {
   try {
-    const connectionString = env('MONGODB_CONNECTION_STRING');
+    const user = env('MONGODB_USER');
+    const password = env('MONGODB_PASSWORD');
+    const url = env('MONGODB_URL');
+    const db = env('MONGODB_DB');
+
+    const connectionString = `mongodb+srv://${user}:${password}@${url}/${db}?retryWrites=true&w=majority`;
 
     await mongoose.connect(connectionString);
 
