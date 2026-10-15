@@ -11,6 +11,10 @@ export async function initMongoConnection() {
 
     await mongoose.connect(
       `mongodb+srv://${user}:${pwd}@${url}/${db}?retryWrites=true&w=majority`,
+      {
+        connectTimeoutMS: 30000,
+        socketTimeoutMS: 45000,
+      },
     );
 
     console.log("Mongo connection successfully established!");
