@@ -6,13 +6,33 @@ import {
   updateContact,
   deleteContact,
 } from '../services/contacts.js';
+import { parseQueryParams } from '../utils/parseQueryParams.js';
 
 export const getContactsController = async (req, res) => {
-  const data = await getAllContacts();
+  const { page, perPage, sortBy, sortOrder, filter } = parseQueryParams(
+    req.query,
+  );
+
+  const result = await getAllContacts({
+    page,
+    perPage,
+    sortBy,
+    sortOrder,
+    filter,
+  });
+
   res.status(200).json({
     status: 200,
     message: 'Successfully found contacts!',
-    data: data,
+    data: {
+      data: result.contacts,
+      page: result.page,
+      perPage: result.perPage,
+      totalItems: result.totalItems,
+      totalPages: result.totalPages,
+      hasPreviousPage: result.hasPreviousPage,
+      hasNextPage: result.hasNextPage,
+    },
   });
 };
 
