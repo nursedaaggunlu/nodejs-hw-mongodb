@@ -9,8 +9,6 @@ export async function initMongoConnection() {
     const url = env('MONGODB_URL');
     const db = env('MONGODB_DB');
 
-    // .env dosyasındaki url içinde 'localhost' veya '127.0.0.1' geçiyorsa LOKAL bağlantı kur,
-    // gerçek bir bulut adresi varsa BULUT (mongodb+srv) bağlantısı kur.
     const isLocal = url.includes('localhost') || url.includes('127.0.0.1');
 
     const connectionLink = isLocal
