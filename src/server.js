@@ -2,6 +2,8 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import authRouter from './routers/auth.js';
 import { env } from './utils/env.js';
 import contactsRouter from './routers/contacts.js';
 import { errorHandler } from './middlewares/errorHandler.js';
@@ -14,6 +16,7 @@ export function setupServer() {
   const PORT = Number(env('PORT', 3000));
 
   app.use(express.json());
+  app.use(cookieParser());
   app.use(cors());
 
   app.use(
@@ -23,6 +26,8 @@ export function setupServer() {
       },
     }),
   );
+
+  app.use('/auth', authRouter);
 
   app.use(contactsRouter);
 

@@ -23,6 +23,11 @@ const contactsSchema = new Schema(
     email: {
       type: String,
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
   },
   {
     timestamps: true,
