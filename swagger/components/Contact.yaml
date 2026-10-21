@@ -1,0 +1,28 @@
+type: object
+properties:
+  _id:
+    type: string
+    example: 653d16b5a3e4a51362e549b4
+  name:
+    type: string
+    example: Nur Seda Ağgünlü
+  phoneNumber:
+    type: string
+    example: '+905555555555'
+  email:
+    type: string
+    example: seda@example.com
+  isFavourite:
+    type: boolean
+    example: true
+  contactType:
+    type: string
+    enum: [work, home, personal]
+    example: personal
+  photo:
+    type: string
+    nullable: true
+    example: https://cloudinary.com
+  userId:
+    type: string
+    example: 653d16b5a3e4a51362e549a1

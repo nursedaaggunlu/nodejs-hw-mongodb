@@ -3,9 +3,12 @@ import pino from 'pino-http';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
-import authRouter from './routers/auth.js';
+import swaggerUi from 'swagger-ui-express';
+import YAML from 'yamljs';
+import path from 'path';
 import { env } from './utils/env.js';
 import contactsRouter from './routers/contacts.js';
+import authRouter from './routers/auth.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
@@ -27,12 +30,13 @@ export function setupServer() {
     }),
   );
 
-  app.use('/auth', authRouter);
+  const swaggerDocument = YAML.load(path.resolve('docs/openapi.yaml'));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+  app.use('/auth', authRouter);
   app.use(contactsRouter);
 
   app.use(notFoundHandler);
-
   app.use(errorHandler);
 
   app.listen(PORT, () => {

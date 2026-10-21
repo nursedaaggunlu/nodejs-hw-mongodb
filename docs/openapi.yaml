@@ -1,0 +1,24 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Contacts App API
+  license:
+    name: Apache 2.0
+    url: http://apache.org
+  description: Contacts management application backend REST API with authentication and image upload features.
+tags:
+  - name: Auth
+    description: Authentication endpoints
+  - name: Contacts
+    description: Contact collection CRUD endpoints
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+  - url: https://onrender.com
+    description: Production server on Render
+paths:
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer

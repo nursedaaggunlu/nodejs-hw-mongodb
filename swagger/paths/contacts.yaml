@@ -1,0 +1,29 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: Contacts App API
+  license:
+    name: Apache 2.0
+    url: http://apache.org
+  description: Contacts management application backend REST API with authentication and image upload features.
+tags:
+  - name: Contacts
+    description: Contact collection CRUD endpoints
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+  - url: https://onrender.com
+    description: Production server on Render
+paths:
+  /contacts:
+    $ref: '../swagger/paths/contacts.yaml#/contacts'
+  /contacts/{id}:
+    $ref: '../swagger/paths/contacts.yaml#/contacts/{id}'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    Contact:
+      $ref: '../swagger/components/Contact.yaml'

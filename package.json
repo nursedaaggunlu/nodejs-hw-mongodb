@@ -5,12 +5,16 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "build": "npm run build-docs",
+    "build-docs": "redocly bundle --ext json -o docs/swagger.json",
+    "preview-docs": "redocly preview-docs"
   },
   "keywords": [],
   "author": "Nur Seda Ağgünlü <nursedaaggunlu@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@redocly/cli": "^2.66.1",
     "eslint": "^9.12.0",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3"
@@ -29,6 +33,8 @@
     "multer": "^2.4.0",
     "nodemailer": "^10.1.7",
     "pino-http": "^10.1.0",
-    "pino-pretty": "^11.2.1"
+    "pino-pretty": "^11.2.1",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
   }
 }
