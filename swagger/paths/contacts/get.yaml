@@ -1,0 +1,85 @@
+tags:
+  - Contacts
+summary: Get list of contacts
+operationId: getContacts
+description: Get list of contacts with pagination, sorting, and filtering
+security:
+  - bearerAuth: []
+parameters:
+  - in: query
+    name: page
+    schema:
+      type: integer
+      example: 1
+    description: Page number
+  - in: query
+    name: perPage
+    schema:
+      type: integer
+      example: 10
+    description: Number of items per page
+  - in: query
+    name: sortBy
+    schema:
+      type: string
+      example: name
+    description: Field to sort by
+  - in: query
+    name: sortOrder
+    schema:
+      type: string
+      enum: [asc, desc]
+      example: asc
+    description: Sort order
+  - in: query
+    name: type
+    schema:
+      type: string
+      enum: [work, home, personal]
+    description: Filter by contact type
+  - in: query
+    name: isFavourite
+    schema:
+      type: boolean
+    description: Filter by favourite status
+responses:
+  '200':
+    description: Successfully found contacts!
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully found contacts!
+            data:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: '../../../components/Contact.yaml'
+                page:
+                  type: integer
+                  example: 1
+                perPage:
+                  type: integer
+                  example: 10
+                totalItems:
+                  type: integer
+                  example: 6
+                totalPages:
+                  type: integer
+                  example: 1
+                hasPreviousPage:
+                  type: boolean
+                  example: false
+                hasNextPage:
+                  type: boolean
+                  example: false
+  '401':
+    description: Unauthorized

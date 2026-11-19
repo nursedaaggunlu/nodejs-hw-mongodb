@@ -1,0 +1,57 @@
+tags:
+  - Contacts
+summary: Create a new contact
+operationId: createContact
+description: Create a new contact with optional photo upload
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - name
+          - phoneNumber
+          - contactType
+        properties:
+          name:
+            type: string
+            example: Nur Seda Ağgünlü
+          phoneNumber:
+            type: string
+            example: '+905551234567'
+          email:
+            type: string
+            example: seda@example.com
+          isFavourite:
+            type: boolean
+            example: true
+          contactType:
+            type: string
+            enum: [work, home, personal]
+            example: personal
+          photo:
+            type: string
+            format: binary
+responses:
+  '201':
+    description: Successfully created a contact!
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a contact!
+            data:
+              $ref: '../../../components/Contact.yaml'
+  '400':
+    description: Validation error
+  '401':
+    description: Unauthorized
